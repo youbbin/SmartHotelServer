@@ -17,6 +17,7 @@ public class SafeboxService {
         Optional<Room> optionalRoom = roomRepository.findById(safePasswordInputDto.getRoomNumber());
         Room room = optionalRoom.get();
         if(safePasswordInputDto.getSafePassword() != room.getSafePassword()){
+            room.setSafeOpen(false); // 금고 잠김
             return SafePasswordResponseDto.builder()
                     .isCorrect(false)
                     .build();// 비밀번호 불일치
