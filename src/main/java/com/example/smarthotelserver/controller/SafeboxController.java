@@ -16,4 +16,6 @@ public class SafeboxController {
     public Object safePassword(@RequestBody SafePasswordInputDto safePasswordInputDto){
         return safeboxService.match(safePasswordInputDto);
     }
+
+
 }
