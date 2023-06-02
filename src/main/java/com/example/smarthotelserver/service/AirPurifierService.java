@@ -15,24 +15,16 @@ import java.util.Optional;
 public class AirPurifierService {
     private final RoomRepository roomRepository;
 
-    public boolean updateAirPurifier(AirPurifierDto airPurifierDto){
+    public Object updateAirPurifier(AirPurifierDto airPurifierDto){
         Optional<Room> optionalRoom = roomRepository.findById(airPurifierDto.getRoomNumber());
-
-        Room room = optionalRoom.get();
-        room.setGasConcentration(airPurifierDto.getGasConcentration());
-        boolean currentPowerState = room.isAirPurifierPower();
-        boolean requestedPowerState = airPurifierDto.isAirPurifierPower();
-
-        log.info(String.valueOf(room.isAirPurifierPower()));
-        log.info(String.valueOf(airPurifierDto.isAirPurifierPower()));
-
-        if (currentPowerState != requestedPowerState) {
-            //room.setAirPurifierPower(requestedPowerState);
+        if(optionalRoom.isPresent()){
+            Room room = optionalRoom.get();
+            room.setGasConcentration(airPurifierDto.getGasConcentration());
+            room.setTemperature(airPurifierDto.getTemperature());
             roomRepository.save(room);
-            return true; // Air Purifier State change required
+            return room.isAirPurifierPower();
         }
-        roomRepository.save(room);
-        return false; // Air Purifier State change not required
+        else return "Room Number Not Found";
     }
 
 }

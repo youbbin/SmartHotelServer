@@ -6,5 +6,5 @@ import lombok.Getter;
 @Getter
 @Builder
 public class SafePasswordResponseDto {
-    private boolean isCorrect;
+    private boolean isOpen;
 }

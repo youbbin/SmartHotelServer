@@ -23,8 +23,8 @@ public class Room {
     private boolean deskLedPower; // 협탁등 전원
     private boolean ceilingLedPower; // 천장등 전원
     private String ceilingLedColor; // 천장등 색깔
-    private String audioSong; // 노래
+    private int audioSong; // 노래
     private boolean bathtubWaterReceived; // 욕조 물받음 여부
-
+    private double temperature; // 온도
 
 }

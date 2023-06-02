@@ -3,7 +3,7 @@ package com.example.smarthotelserver.dto;
 import lombok.Getter;
 
 @Getter
-public class AuthenicationRequestDto {
+public class AuthenticationRequestDto {
     private Long roomNumber;
     private String phoneNumber;
 }

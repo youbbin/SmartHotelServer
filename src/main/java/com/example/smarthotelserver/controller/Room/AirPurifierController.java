@@ -1,4 +1,4 @@
-package com.example.smarthotelserver.controller;
+package com.example.smarthotelserver.controller.Room;
 
 import com.example.smarthotelserver.dto.AirPurifierDto;
 import com.example.smarthotelserver.service.AirPurifierService;
@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 public class AirPurifierController {
     private final AirPurifierService airPurifierService;
     @PostMapping("/room/air-purifier")
-    public boolean airPurifier(@RequestBody AirPurifierDto airPurifierDto){
+    public Object airPurifier(@RequestBody AirPurifierDto airPurifierDto){
         return airPurifierService.updateAirPurifier(airPurifierDto);
     }
 }

@@ -5,7 +5,7 @@ import lombok.Getter;
 
 @Getter
 @Builder
-public class SafePasswordInputDto {
+public class SafeOpenDto {
     private Long roomNumber; // 객실번호(PK)
-    private String safePassword;
+    private boolean isOpen;
 }

@@ -1,6 +1,6 @@
 package com.example.smarthotelserver.service;
 
-import com.example.smarthotelserver.dto.SafePasswordInputDto;
+import com.example.smarthotelserver.dto.SafeOpenDto;
 import com.example.smarthotelserver.dto.SafePasswordResponseDto;
 import com.example.smarthotelserver.entity.Room;
 import com.example.smarthotelserver.repository.RoomRepository;
@@ -13,18 +13,23 @@ import java.util.Optional;
 public class SafeboxService {
     private final RoomRepository roomRepository;
 
-    public Object match(SafePasswordInputDto safePasswordInputDto){
-        Optional<Room> optionalRoom = roomRepository.findById(safePasswordInputDto.getRoomNumber());
-        Room room = optionalRoom.get();
-        if(safePasswordInputDto.getSafePassword() != room.getSafePassword()){
-            room.setSafeOpen(false); // 금고 잠김
+    public Object open(SafeOpenDto safeOpenDto) {
+        Optional<Room> optionalRoom = roomRepository.findById(safeOpenDto.getRoomNumber());
+        if (optionalRoom.isPresent()) {
+            Room room = optionalRoom.get();
+
+            room.setSafeOpen(safeOpenDto.isOpen()); // 금고 열림
+            roomRepository.save(room);
             return SafePasswordResponseDto.builder()
-                    .isCorrect(false)
-                    .build();// 비밀번호 불일치
+                    .isOpen(true)
+                    .build();// 비밀번호 일치
         }
-        room.setSafeOpen(true); // 금고 열림
-        return SafePasswordResponseDto.builder()
-                .isCorrect(true)
-                .build();// 비밀번호 일치
+        else return "Room Number Not Found";
+    }
+
+    public boolean isOpen(Long roomNumber){
+        Optional<Room> optionalRoom = roomRepository.findById(roomNumber);
+        Room room = optionalRoom.get();
+        return room.isSafeOpen();
     }
 }

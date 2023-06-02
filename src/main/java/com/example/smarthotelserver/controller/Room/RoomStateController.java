@@ -1,4 +1,4 @@
-package com.example.smarthotelserver.controller;
+package com.example.smarthotelserver.controller.Room;
 
 import com.example.smarthotelserver.service.RoomStateService;
 import lombok.RequiredArgsConstructor;
@@ -14,5 +14,15 @@ public class RoomStateController {
     @GetMapping ("/room/state/{roomNumber}")
     public Object roomState(@PathVariable("roomNumber") Long roomNumber){
         return roomStateService.getRoomState(roomNumber);
+    }
+
+    @GetMapping("room/state/arduino-mega/{roomNumber}")
+    public Object arduino3State(@PathVariable("roomNumber") Long roomNumber){
+        return roomStateService.getArduinoMegaState(roomNumber);
+    }
+
+    @GetMapping("room/state/rfid/{roomNumber}")
+    public Object rfidId(@PathVariable("roomNumber") Long roomNumber){
+        return roomStateService.getRfidId(roomNumber);
     }
 }

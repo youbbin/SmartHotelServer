@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -21,6 +23,7 @@ public class CheckInService {
                 .guestName(adminCheckInDto.getGuestName())
                 .phoneNumber(adminCheckInDto.getPhoneNumber())
                 .rfidId(adminCheckInDto.getRfidId())
+                .safeOpen(false)
                 .build();
         roomRepository.save(room);
 
@@ -28,20 +31,23 @@ public class CheckInService {
     }
 
     public String guestSave(GuestCheckInDto guestCheckInDto){
-        Room room = Room.builder()
-                .roomNumber(guestCheckInDto.getRoomNumber())
-                .airPurifierPower(guestCheckInDto.isAirPurifierPower())
-                .gasConcentration(guestCheckInDto.getGasConcentration())
-                .safePassword(guestCheckInDto.getSafePassword())
-                .deskLedPower(guestCheckInDto.isDeskLedPower())
-                .ceilingLedColor(guestCheckInDto.getCeilingLedColor())
-                .ceilingLedPower(guestCheckInDto.isCeilingLedPower())
-                .audioSong(guestCheckInDto.getAudioSong())
-                .bathtubWaterReceived(guestCheckInDto.isBathtubWaterReceived())
-                .safeOpen(false)
-                .build();
-        roomRepository.save(room);
-        return "Guest Admin Check-In Completed";
+        Optional<Room> optionalRoom = roomRepository.findById(guestCheckInDto.getRoomNumber());
+        if(optionalRoom.isPresent()){
+            Room room = optionalRoom.get();
+            room.setSafePassword(guestCheckInDto.getSafePassword());
+            room.setDeskLedPower(guestCheckInDto.isDeskLedPower());
+            room.setAirPurifierPower(guestCheckInDto.isAirPurifierPower());
+            room.setCeilingLedPower(guestCheckInDto.isCeilingLedPower());
+            room.setCeilingLedColor(guestCheckInDto.getCeilingLedColor());
+            room.setAudioSong(guestCheckInDto.getAudioSong());
+            //room.setBathtubWaterReceived(guestCheckInDto.isBathtubWaterReceived());
+
+            roomRepository.save(room);
+            return "Guest Admin Check-In Completed";
+        }
+
+        else return "Room Number Not Found";
+
     }
 
 }
