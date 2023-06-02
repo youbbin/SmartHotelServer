@@ -24,28 +24,36 @@ public class CheckInService {
                 .phoneNumber(adminCheckInDto.getPhoneNumber())
                 .rfidId(adminCheckInDto.getRfidId())
                 .safeboxOpen(false)
+                .deskLedPower(true)
+                .ceilingLedPower(true)
+                .ceilingLedColor("255,255,255")
+                .gasConcentration(550)
+                .temperature(0)
+                .airPurifierPower(true)
+                .audioSong(0)
                 .build();
         roomRepository.save(room);
-
+        log.info("Room "+adminCheckInDto.getRoomNumber()+" Admin Check-In Completed");
         return "Admin Check-In Completed";
     }
 
-    public String guestSave(GuestCheckInDto guestCheckInDto){
-        Optional<Room> optionalRoom = roomRepository.findById(guestCheckInDto.getRoomNumber());
-        if(optionalRoom.isPresent()){
-            Room room = optionalRoom.get();
-            room.setDeskLedPower(guestCheckInDto.isDeskLedPower());
-            room.setAirPurifierPower(guestCheckInDto.isAirPurifierPower());
-            room.setCeilingLedPower(guestCheckInDto.isCeilingLedPower());
-            room.setCeilingLedColor(guestCheckInDto.getCeilingLedColor());
-            room.setAudioSong(guestCheckInDto.getAudioSong());
-
-            roomRepository.save(room);
-            return "Guest Check-In Completed";
-        }
-
-        else return "Room Number Not Found";
-
-    }
+//    public String guestSave(GuestCheckInDto guestCheckInDto){
+//        Optional<Room> optionalRoom = roomRepository.findById(guestCheckInDto.getRoomNumber());
+//        if(optionalRoom.isPresent()){
+//            Room room = optionalRoom.get();
+//            room.setDeskLedPower(guestCheckInDto.isDeskLedPower());
+//            room.setAirPurifierPower(guestCheckInDto.isAirPurifierPower());
+//            room.setCeilingLedPower(guestCheckInDto.isCeilingLedPower());
+//            room.setCeilingLedColor(guestCheckInDto.getCeilingLedColor());
+//            room.setAudioSong(guestCheckInDto.getAudioSong());
+//
+//            roomRepository.save(room);
+//            log.info("Room "+guestCheckInDto.getRoomNumber()+" Guest Check-In Completed");
+//            return "Guest Check-In Completed";
+//        }
+//
+//        else return "Room Number Not Found";
+//
+//    }
 
 }

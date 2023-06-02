@@ -21,8 +21,8 @@ public class CheckInController {
         return checkInService.adminSave(adminCheckInDto);
     }
 
-    @PostMapping("/guest")
-    public String guestCheckIn(@RequestBody GuestCheckInDto guestCheckInDto){
-        return checkInService.guestSave(guestCheckInDto);
-    }
+//    @PostMapping("/guest")
+//    public String guestCheckIn(@RequestBody GuestCheckInDto guestCheckInDto){
+//        return checkInService.guestSave(guestCheckInDto);
+//    }
 }

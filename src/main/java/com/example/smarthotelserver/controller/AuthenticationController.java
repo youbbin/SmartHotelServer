@@ -18,7 +18,7 @@ public class AuthenticationController {
 //    }
 
     // 룸넘버, 전화번호로 인증
-    @GetMapping("/authentication")
+    @PostMapping("/authentication")
     public Object authenticateByPhoneNumber(@RequestBody AuthenticationRequestDto authenticationRequestDto){
         return authenticationService.authenticateByPhoneNumber(authenticationRequestDto);
     }

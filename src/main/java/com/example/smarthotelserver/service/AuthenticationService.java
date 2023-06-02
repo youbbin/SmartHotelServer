@@ -41,6 +41,7 @@ public class AuthenticationService {
         if(optionalRoom.isPresent()){
             Room room = optionalRoom.get();
             if(authenticationRequestDto.getPhoneNumber().equals(room.getPhoneNumber())){
+                log.info("Room "+authenticationRequestDto.getRoomNumber()+" Authentication Completed");
                 return AuthenticationResponseDto.builder()
                         .roomNumber(room.getRoomNumber())
                         .guestName(room.getGuestName())
@@ -48,6 +49,7 @@ public class AuthenticationService {
                         .build();
             }
         }
+        log.info("Room "+authenticationRequestDto.getRoomNumber()+" Authentication Failed");
         return "Authentication Failed";
     }
 }

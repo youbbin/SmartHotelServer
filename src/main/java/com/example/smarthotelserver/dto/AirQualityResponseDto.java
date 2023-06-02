@@ -6,6 +6,6 @@ import lombok.Getter;
 @Builder
 @Getter
 public class AirQualityResponseDto {
-    private boolean airQuality;
+    private boolean gasQuality;
     private double temperature;
 }

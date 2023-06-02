@@ -6,11 +6,13 @@ import com.example.smarthotelserver.dto.RoomStateResponseDto;
 import com.example.smarthotelserver.entity.Room;
 import com.example.smarthotelserver.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
 @Service
+@Slf4j
 @RequiredArgsConstructor
 public class RoomStateService {
     private final RoomRepository roomRepository;
@@ -18,6 +20,7 @@ public class RoomStateService {
         Optional<Room> optionalRoom = roomRepository.findById(roomNumber);
         if(optionalRoom.isPresent()){
             Room room = optionalRoom.get();
+            log.info(roomNumber+ " GET Room State Completed");
             return RoomStateResponseDto.builder()
                     .roomNumber(room.getRoomNumber())
                     .airPurifierPower(room.isAirPurifierPower())
@@ -31,7 +34,8 @@ public class RoomStateService {
                     .build();
 
         }
-       return "Room Number Not Found";
+        log.info(roomNumber+ " GET Room State Failed");
+        return "Room Number Not Found";
     }
 
     public Object getAudio(Long roomNumber){
@@ -78,12 +82,13 @@ public class RoomStateService {
                 airQuality = true;
             }
             else airQuality = false;
-
+            log.info(roomNumber+ " GET Air Quality Response Completed");
             return AirQualityResponseDto.builder()
-                    .airQuality(airQuality)
+                    .gasQuality(airQuality)
                     .temperature(room.getTemperature())
                     .build();
         }
+        log.info(roomNumber+ " GET Air Quality Response Failed");
         return "Room Number Not Found";
 
     }
