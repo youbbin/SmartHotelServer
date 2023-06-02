@@ -78,10 +78,10 @@ public class RoomStateService {
         Optional<Room> optionalRoom = roomRepository.findById(roomNumber);
         if(optionalRoom.isPresent()){
             Room room = optionalRoom.get();
-            if(room.getGasConcentration()>550){
-                airQuality = true;
+            if(room.getGasConcentration()>=550){
+                airQuality = false;
             }
-            else airQuality = false;
+            else airQuality = true;
             log.info(roomNumber+ " GET Air Quality Response Completed");
             return AirQualityResponseDto.builder()
                     .gasQuality(airQuality)

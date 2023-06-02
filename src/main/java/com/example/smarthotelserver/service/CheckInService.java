@@ -27,8 +27,8 @@ public class CheckInService {
                 .deskLedPower(true)
                 .ceilingLedPower(true)
                 .ceilingLedColor("255,255,255")
-                .gasConcentration(550)
-                .temperature(0)
+                .gasConcentration(0)
+                .temperature(26.5)
                 .airPurifierPower(true)
                 .audioSong(0)
                 .build();
