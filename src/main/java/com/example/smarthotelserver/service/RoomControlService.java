@@ -21,9 +21,8 @@ public class RoomControlService {
             room.setCeilingLedColor(roomControlDto.getCeilingLedColor());
             room.setCeilingLedPower(roomControlDto.isCeilingLedPower());
             room.setDeskLedPower(roomControlDto.isDeskLedPower());
-            room.setBathtubWaterReceived(roomControlDto.isBathtubWaterReceived());
             room.setAirPurifierPower(roomControlDto.isAirPurifierPower());
-            room.setSafePassword(roomControlDto.getSafePassword());
+            room.setSafeboxOpen(roomControlDto.isSafeboxOpen());
             roomRepository.save(room);
             return "Control Completed";
         }

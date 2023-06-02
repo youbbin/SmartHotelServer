@@ -25,4 +25,14 @@ public class RoomStateController {
     public Object rfidId(@PathVariable("roomNumber") Long roomNumber){
         return roomStateService.getRfidId(roomNumber);
     }
+
+    @GetMapping("room/state/air-quality/{roomNumber}")
+    public Object airQuality(@PathVariable("roomNumber") Long roomNumber){
+        return roomStateService.getAirQuality(roomNumber);
+    }
+
+    @GetMapping("room/state/audio/{roomNumber}")
+    public Object audio(@PathVariable("roomNumber") Long roomNumber){
+        return roomStateService.getAudio(roomNumber);
+    }
 }

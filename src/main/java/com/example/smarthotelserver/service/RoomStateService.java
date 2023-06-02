@@ -1,5 +1,6 @@
 package com.example.smarthotelserver.service;
 
+import com.example.smarthotelserver.dto.AirQualityResponseDto;
 import com.example.smarthotelserver.dto.ArduinoMegaDto;
 import com.example.smarthotelserver.dto.RoomStateResponseDto;
 import com.example.smarthotelserver.entity.Room;
@@ -24,10 +25,9 @@ public class RoomStateService {
                     .deskLedPower(room.isDeskLedPower())
                     .ceilingLedPower(room.isCeilingLedPower())
                     .ceilingLedColor(room.getCeilingLedColor())
-                    .safePassword(room.getSafePassword())
                     .audioSong(room.getAudioSong())
-                    .bathtubWaterReceived(room.isBathtubWaterReceived())
                     .temperature(room.getTemperature())
+                    .safeboxOpen(room.isSafeboxOpen())
                     .build();
 
         }
@@ -52,10 +52,9 @@ public class RoomStateService {
                     .ceilingLedPower(room.isCeilingLedPower())
                     .ceilingLedColor(room.getCeilingLedColor())
                     .deskLedPower(room.isDeskLedPower())
-                    .bathtubWaterReceived(room.isBathtubWaterReceived())
                     .temperature(room.getTemperature())
                     .gasConcentration(room.getGasConcentration())
-                    .isOpen(room.isSafeOpen())
+                    .safeboxOpen(room.isSafeboxOpen())
                     .build();
         }
         return "Room Number Not Found";
@@ -68,5 +67,24 @@ public class RoomStateService {
             return "@"+room.getRfidId()+"@";
         }
         else return "Room Number Not Found";
+    }
+
+    public Object getAirQuality(Long roomNumber){
+        boolean airQuality;
+        Optional<Room> optionalRoom = roomRepository.findById(roomNumber);
+        if(optionalRoom.isPresent()){
+            Room room = optionalRoom.get();
+            if(room.getGasConcentration()>550){
+                airQuality = true;
+            }
+            else airQuality = false;
+
+            return AirQualityResponseDto.builder()
+                    .airQuality(airQuality)
+                    .temperature(room.getTemperature())
+                    .build();
+        }
+        return "Room Number Not Found";
+
     }
 }

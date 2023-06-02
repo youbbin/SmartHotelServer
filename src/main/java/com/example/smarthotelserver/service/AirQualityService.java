@@ -1,6 +1,6 @@
 package com.example.smarthotelserver.service;
 
-import com.example.smarthotelserver.dto.AirPurifierDto;
+import com.example.smarthotelserver.dto.AirQualityRequestDto;
 import com.example.smarthotelserver.entity.Room;
 import com.example.smarthotelserver.repository.RoomRepository;
 import lombok.RequiredArgsConstructor;
@@ -12,15 +12,15 @@ import java.util.Optional;
 @Slf4j
 @Service
 @RequiredArgsConstructor
-public class AirPurifierService {
+public class AirQualityService {
     private final RoomRepository roomRepository;
 
-    public Object updateAirPurifier(AirPurifierDto airPurifierDto){
-        Optional<Room> optionalRoom = roomRepository.findById(airPurifierDto.getRoomNumber());
+    public Object updateAirQuality(AirQualityRequestDto airQualityRequestDto){
+        Optional<Room> optionalRoom = roomRepository.findById(airQualityRequestDto.getRoomNumber());
         if(optionalRoom.isPresent()){
             Room room = optionalRoom.get();
-            room.setGasConcentration(airPurifierDto.getGasConcentration());
-            room.setTemperature(airPurifierDto.getTemperature());
+            room.setGasConcentration(airQualityRequestDto.getGasConcentration());
+            room.setTemperature(airQualityRequestDto.getTemperature());
             roomRepository.save(room);
             return room.isAirPurifierPower();
         }

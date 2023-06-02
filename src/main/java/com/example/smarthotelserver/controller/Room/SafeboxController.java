@@ -10,11 +10,6 @@ import org.springframework.web.bind.annotation.*;
 public class SafeboxController {
 
     private final SafeboxService safeboxService;
-    @PostMapping("room/safebox")
-    public Object safePassword(@RequestBody SafeOpenDto safeOpenDto){
-        return safeboxService.open(safeOpenDto);
-    }
-
 
     @GetMapping("room/safebox/{roomNumber}")
     public boolean isOpen(@PathVariable("roomNumber") Long roomNumber){

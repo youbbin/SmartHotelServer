@@ -1,2 +1,11 @@
-package com.example.smarthotelserver.dto;public class AirQualityResponseDto {
+package com.example.smarthotelserver.dto;
+
+import lombok.Builder;
+import lombok.Getter;
+
+@Builder
+@Getter
+public class AirQualityResponseDto {
+    private boolean airQuality;
+    private double temperature;
 }

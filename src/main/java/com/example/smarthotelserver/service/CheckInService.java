@@ -23,7 +23,7 @@ public class CheckInService {
                 .guestName(adminCheckInDto.getGuestName())
                 .phoneNumber(adminCheckInDto.getPhoneNumber())
                 .rfidId(adminCheckInDto.getRfidId())
-                .safeOpen(false)
+                .safeboxOpen(false)
                 .build();
         roomRepository.save(room);
 
@@ -34,16 +34,14 @@ public class CheckInService {
         Optional<Room> optionalRoom = roomRepository.findById(guestCheckInDto.getRoomNumber());
         if(optionalRoom.isPresent()){
             Room room = optionalRoom.get();
-            room.setSafePassword(guestCheckInDto.getSafePassword());
             room.setDeskLedPower(guestCheckInDto.isDeskLedPower());
             room.setAirPurifierPower(guestCheckInDto.isAirPurifierPower());
             room.setCeilingLedPower(guestCheckInDto.isCeilingLedPower());
             room.setCeilingLedColor(guestCheckInDto.getCeilingLedColor());
             room.setAudioSong(guestCheckInDto.getAudioSong());
-            //room.setBathtubWaterReceived(guestCheckInDto.isBathtubWaterReceived());
 
             roomRepository.save(room);
-            return "Guest Admin Check-In Completed";
+            return "Guest Check-In Completed";
         }
 
         else return "Room Number Not Found";

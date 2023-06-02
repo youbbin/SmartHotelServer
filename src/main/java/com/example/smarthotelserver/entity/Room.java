@@ -18,13 +18,11 @@ public class Room {
     private String rfidId; // 객실카드키(RFID) ID
     private boolean airPurifierPower; // 공기청정기 전원
     private double gasConcentration; // 가스 농도
-    private String safePassword; // 금고 비밀번호
-    private boolean safeOpen; // 금고 개폐여부
+    private boolean safeboxOpen; // 금고 개폐여부
     private boolean deskLedPower; // 협탁등 전원
     private boolean ceilingLedPower; // 천장등 전원
     private String ceilingLedColor; // 천장등 색깔
     private int audioSong; // 노래
-    private boolean bathtubWaterReceived; // 욕조 물받음 여부
     private double temperature; // 온도
 
 }
