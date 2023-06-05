@@ -34,20 +34,20 @@ public class SongListController {
 
     // 곡 정보를 담는 클래스
     public static class Song {
-        private int number;
-        private String title;
+        private int songNumber;
+        private String songString;
 
-        public Song(int number, String title) {
-            this.number = number;
-            this.title = title;
+        public Song(int songNumber, String songString) {
+            this.songNumber = songNumber;
+            this.songString = songString;
         }
 
-        public int getNumber() {
-            return number;
+        public int getSongNumber() {
+            return songNumber;
         }
 
-        public String getTitle() {
-            return title;
+        public String getSongString() {
+            return songString;
         }
     }
 }
